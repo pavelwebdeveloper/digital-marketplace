@@ -1,0 +1,17 @@
+[
+    {
+        "id": "photos",
+        "name": "Photos",
+        "slug": "photos"
+    },
+    {
+        "id": "excel-templates",
+        "name": "Excel Templates",
+        "slug": "excel-templates"
+    },
+    {
+        "id": "games",
+        "name": "Games",
+        "slug": "games"
+    }
+]

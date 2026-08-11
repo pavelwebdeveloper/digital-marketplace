@@ -1,0 +1,60 @@
+[
+    {
+        "id": "agay-coast",
+        "title": "Agay Coast",
+        "description": "Agay coast photograph.",
+        "price": 1.00,
+        "categoryId": "photos",
+        "thumbnail": "/images/agay-coast.jpg",
+        "downloadFile": "/downloads/agay-coast.zip",
+        "tags": [
+            "mountains",
+            "coast",
+            "sea",
+            "nature",
+            "France",
+            "French Riviera"
+        ],
+        "published": true,
+        "createdAt": "2026-08-10T00:00:00.000Z",
+        "updatedAt": "2026-08-10T00:00:00.000Z"
+    },
+    {
+        "id": "monthly-budget",
+        "title": "Monthly Budget Template",
+        "description": "A simple Excel template for tracking monthly income and expenses.",
+        "price": 24.99,
+        "categoryId": "excel-templates",
+        "thumbnail": "/images/monthly-budget.jpg",
+        "downloadFile": "/downloads/monthly-budget.xlsx",
+        "tags": [
+            "excel",
+            "budget",
+            "finance"
+        ],
+        "published": true,
+        "createdAt": "2026-08-10T00:00:00.000Z",
+        "updatedAt": "2026-08-10T00:00:00.000Z"
+    },
+    {
+        "id": "flight-among-asteroids-arcade-game",
+        "title": "Python Arcade Adventure Game",
+        "description": "A small space adventure game created with Python.",
+        "price": 9.99,
+        "categoryId": "games",
+        "thumbnail": "/images/flight-among-asteroids-arcade-game.jpg",
+        "downloadFile": "/downloads/flight-among-asteroids-arcade-game.zip",
+        "tags": [
+            "python",
+            "game",
+            "adventure",
+            "Arcade game",
+            "flight",
+            "space",
+            "space flight"
+        ],
+        "published": true,
+        "createdAt": "2026-08-10T00:00:00.000Z",
+        "updatedAt": "2026-08-10T00:00:00.000Z"
+    }
+]
