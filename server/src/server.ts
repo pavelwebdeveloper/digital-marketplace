@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import type { Product } from "@digital-marketplace/shared";
 
 const app = express();
 const PORT = 3000;

@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "tsx watch src/server.ts",
-  "build": "tsc",
-  "start": "node dist/server.js"
-},
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@digital-marketplace/shared": "file:../shared",
     "cors": "^2.8.6",
     "express": "^5.2.1"
   },
