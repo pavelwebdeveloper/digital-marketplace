@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import type { Product } from "@digital-marketplace/shared";
+
+import productRoutes from "./routes/productRoutes.js";
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +15,8 @@ app.get("/api/health", (_req, res) => {
         message: "Digital Marketplace API is running"
     });
 });
+
+app.use("/api/products", productRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
