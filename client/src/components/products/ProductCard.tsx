@@ -1,4 +1,5 @@
 import type { Product } from "@digital-marketplace/shared";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
     product: Product;
@@ -23,9 +24,9 @@ export function ProductCard({ product }: ProductCardProps) {
                         ${product.price.toFixed(2)}
                     </span>
 
-                    <button type="button">
+                    <Link to={`/products/${product.id}`}>
                         View Product
-                    </button>
+                    </Link>
                 </div>
             </div>
         </article>
