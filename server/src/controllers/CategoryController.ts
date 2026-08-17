@@ -29,10 +29,17 @@ export class CategoryController {
         res: Response
     ): Promise<void> => {
         try {
-            const category =
-                await this.categoryService.getCategoryById(
-                    req.params.id
-                );
+            const categoryId = req.params.id;
+
+            if (typeof categoryId !== "string") {
+                res.status(400).json({
+                    message: "Invalid category ID"
+                });
+
+                return;
+            }
+
+            const category = await this.categoryService.getCategoryById(categoryId);
 
             if (!category) {
                 res.status(404).json({
