@@ -23,9 +23,17 @@ export class ProductController {
         res: Response
     ): Promise<void> => {
         try {
-            const product = await this.productService.getProductById(
-                req.params.id
-            );
+            const productId = req.params.id;
+
+            if (typeof productId !== "string") {
+                res.status(400).json({
+                    message: "Invalid product ID"
+                });
+
+                return;
+            }
+
+            const product = await this.productService.getProductById(productId);
 
             if (!product) {
                 res.status(404).json({
