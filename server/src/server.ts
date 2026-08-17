@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import productRoutes from "./routes/productRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 const app = express();
 const PORT = 3000;
@@ -17,6 +18,7 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
