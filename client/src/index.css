@@ -70,3 +70,23 @@ main {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.category-button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+}
+
+.category-button.active {
+    font-weight: bold;
+}

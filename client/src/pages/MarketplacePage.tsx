@@ -1,49 +1,81 @@
 import { useEffect, useState } from "react";
 
-import type { Product } from "@digital-marketplace/shared";
+import type {
+    Category,
+    Product
+} from "@digital-marketplace/shared";
 
-import { getProducts } from "../services/api";
+import {
+    getCategories,
+    getProducts
+} from "../services/api";
+
+import { CategoryList } from "../components/products/CategoryList";
 import { ProductList } from "../components/products/ProductList";
 
 export function MarketplacePage() {
     const [products, setProducts] = useState<Product[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [selectedCategory, setSelectedCategory] =
+        useState<string | null>(null);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        async function loadProducts() {
+        async function loadData() {
             try {
-                const data = await getProducts();
-                setProducts(data);
+                const [productsData, categoriesData] =
+                    await Promise.all([
+                        getProducts(),
+                        getCategories()
+                    ]);
+
+                setProducts(productsData);
+                setCategories(categoriesData);
             } catch (error) {
                 console.error(error);
-                setError("Unable to load products.");
+                setError("Unable to load marketplace data.");
             } finally {
                 setLoading(false);
             }
         }
 
-        loadProducts();
+        loadData();
     }, []);
 
     if (loading) {
-        return <p>Loading products...</p>;
+        return <p>Loading marketplace...</p>;
     }
 
     if (error) {
         return <p>{error}</p>;
     }
 
+    const filteredProducts =
+        selectedCategory === null
+            ? products
+            : products.filter(
+                product =>
+                    product.categoryId === selectedCategory
+            );
+
     return (
         <main>
             <h1>Digital Marketplace</h1>
 
             <p>
-                Discover digital products created by independent developers
-                and creators.
+                Discover digital products created by
+                independent developers and creators.
             </p>
 
-            <ProductList products={products} />
+            <CategoryList
+                categories={categories}
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+            />
+
+            <ProductList products={filteredProducts} />
         </main>
     );
 }
