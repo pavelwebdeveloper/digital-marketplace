@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ProductSearch } from "../components/products/ProductSearch";
 
 import type {
     Category,
@@ -85,17 +86,10 @@ export function MarketplacePage() {
                 independent developers and creators.
             </p>
 
-            <div className="search-container">
-                <input
-                    type="search"
-                    placeholder="Search products..."
-                    value={searchTerm}
-                    onChange={event =>
-                        setSearchTerm(event.target.value)
-                    }
-                    aria-label="Search products"
-                />
-            </div>
+            <ProductSearch
+                value={searchTerm}
+                onChange={setSearchTerm}
+            />  
 
             <CategoryList
                 categories={categories}
