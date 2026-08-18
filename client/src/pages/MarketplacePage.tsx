@@ -19,6 +19,8 @@ export function MarketplacePage() {
     const [selectedCategory, setSelectedCategory] =
         useState<string | null>(null);
 
+    const [searchTerm, setSearchTerm] = useState("");
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -52,13 +54,27 @@ export function MarketplacePage() {
         return <p>{error}</p>;
     }
 
-    const filteredProducts =
-        selectedCategory === null
-            ? products
-            : products.filter(
-                product =>
-                    product.categoryId === selectedCategory
+    const normalizedSearchTerm = searchTerm
+        .trim()
+        .toLowerCase();
+
+    const filteredProducts = products.filter(product => {
+        const matchesCategory =
+            selectedCategory === null ||
+            product.categoryId === selectedCategory;
+
+        const matchesSearch =
+            normalizedSearchTerm === "" ||
+            product.title.toLowerCase().includes(normalizedSearchTerm) ||
+            product.description
+                .toLowerCase()
+                .includes(normalizedSearchTerm) ||
+            product.tags.some(tag =>
+                tag.toLowerCase().includes(normalizedSearchTerm)
             );
+
+        return matchesCategory && matchesSearch;
+    });
 
     return (
         <main>
@@ -69,13 +85,31 @@ export function MarketplacePage() {
                 independent developers and creators.
             </p>
 
+            <div className="search-container">
+                <input
+                    type="search"
+                    placeholder="Search products..."
+                    value={searchTerm}
+                    onChange={event =>
+                        setSearchTerm(event.target.value)
+                    }
+                    aria-label="Search products"
+                />
+            </div>
+
             <CategoryList
                 categories={categories}
                 selectedCategory={selectedCategory}
                 onSelectCategory={setSelectedCategory}
             />
 
-            <ProductList products={filteredProducts} />
+            {filteredProducts.length > 0 ? (
+                <ProductList products={filteredProducts} />
+            ) : (
+                <p className="no-results">
+                    No products found.
+                </p>
+            )}
         </main>
     );
 }
