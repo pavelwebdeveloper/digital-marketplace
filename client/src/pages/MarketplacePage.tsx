@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { ProductSearch } from "../components/products/ProductSearch";
 
 import type {
     Category,
@@ -13,6 +12,8 @@ import {
 
 import { CategoryList } from "../components/products/CategoryList";
 import { ProductList } from "../components/products/ProductList";
+import { ProductSearch } from "../components/products/ProductSearch";
+import { filterProducts } from "../utils/productFilters";
 
 export function MarketplacePage() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -55,27 +56,11 @@ export function MarketplacePage() {
         return <p>{error}</p>;
     }
 
-    const normalizedSearchTerm = searchTerm
-        .trim()
-        .toLowerCase();
-
-    const filteredProducts = products.filter(product => {
-        const matchesCategory =
-            selectedCategory === null ||
-            product.categoryId === selectedCategory;
-
-        const matchesSearch =
-            normalizedSearchTerm === "" ||
-            product.title.toLowerCase().includes(normalizedSearchTerm) ||
-            product.description
-                .toLowerCase()
-                .includes(normalizedSearchTerm) ||
-            product.tags.some(tag =>
-                tag.toLowerCase().includes(normalizedSearchTerm)
-            );
-
-        return matchesCategory && matchesSearch;
-    });
+    const filteredProducts = filterProducts(
+        products,
+        searchTerm,
+        selectedCategory
+    );
 
     return (
         <main>
